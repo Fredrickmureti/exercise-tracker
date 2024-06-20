@@ -1,8 +1,4 @@
-Certainly! Here's an example of a README.md tailored to your project using the provided information:
-
----
-
-# Exercise Tracker App
+Exercise Tracker App
 
 Exercise Tracker App is a web application that allows users to log their activities, track their exercise routines, and receive notifications when scheduled activities are due.
 
