@@ -1,0 +1,70 @@
+# Node.js depedancies
+**/node_modules/
+
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# dotenv environment variables file
+.env
+
+# Serverless directories
+.serverless/
+
+
+# Webpack output
+dist/
+
+
+# TypeScript cache
+*.tsbuildinfo
+
+
+# Windows specific files
+Thumbs.db
+
+
+# Runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+
+# Dependency directories
+jspm_packages/
+bower_components/
+
+# Compiled binary addons
+build/Release
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Optional REPL history
+.node_repl_history
