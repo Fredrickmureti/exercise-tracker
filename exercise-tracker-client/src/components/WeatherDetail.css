@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Pacifico&display=swap');
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #f0f2f5;
+  margin: 0;
+  padding: 0;
+}
+
+.weather-detail-page {
+  background-image: url('../assets/WEATHER_CLOUDY_NIGHT.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.weather-detail {
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 2s ease-in-out;
+}
+
+.weather-detail h2 {
+  font-family: 'Pacifico', cursive;
+  font-size: 2.5em;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.current-weather p,
+.forecast p {
+  font-size: 1.2em;
+  color: #333;
+}
+
+.forecast {
+  margin-top: 20px;
+}
+
+.forecast h3 {
+  font-size: 1.5em;
+  color: #333;
+}
+
+.forecast ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.forecast li {
+  font-size: 1.2em;
+  color: #555;
+  margin: 10px 0;
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}

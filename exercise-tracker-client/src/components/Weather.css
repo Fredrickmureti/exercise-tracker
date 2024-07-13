@@ -1,0 +1,38 @@
+.weather-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.weather {
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 2s ease-in-out;
+  transition: transform 0.3s ease;
+}
+
+.weather:hover {
+  transform: scale(1.02);
+}
+
+.weather h2 {
+  font-size: 2em;
+  margin: 0;
+}
+
+.weather p {
+  font-size: 1.2em;
+  margin: 10px 0;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}

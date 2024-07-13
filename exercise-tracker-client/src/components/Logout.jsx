@@ -1,18 +1,23 @@
-import React from "react";
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import './Logout.css';
 
-const Logout = ({setUser}) => {
+const Logout = ({ setUser }) => {
+  const navigate = useNavigate();
 
   const handleLogout = () => {
-    //clear the user state to null (logout)
+    localStorage.removeItem('token');
     setUser(null);
-  }
+    navigate('/login');
+  };
 
   return (
-    <button onClick={handleLogout}>
-      Logout
-    </button>
-  )
-}
-
+    <div className="logout-container">
+      <button className="logout-button" onClick={handleLogout}>
+        Logout
+      </button>
+    </div>
+  );
+};
 
 export default Logout;

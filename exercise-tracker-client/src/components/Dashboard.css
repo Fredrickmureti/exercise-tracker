@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Pacifico&display=swap');
+
+body.dashboard-background {
+  background-image: url('../assets/DASHBOARD.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.dashboard {
+  text-align: center;
+  padding: 50px;
+  background-color: rgba(255, 255, 255, 0.9);
+  /* Slightly transparent background */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 2s ease-in-out;
+}
+
+.welcome-message {
+  font-family: 'Pacifico', cursive;
+  font-size: 3em;
+  color: #333;
+  animation: fadeIn 2s ease-in-out;
+}
+
+.dashboard-buttons {
+  margin-top: 30px;
+}
+
+.dashboard-button {
+  padding: 10px 20px;
+  margin: 10px;
+  font-size: 1.2em;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.dashboard-button:hover {
+  background-color: #ddd;
+}
+
+.time-weather-section {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 50px;
+  padding: 20px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}

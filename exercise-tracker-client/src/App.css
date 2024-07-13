@@ -1,4 +1,20 @@
+body.auth-background {
+  background-image: url('../src/assets/Register.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
 
+body.dashboard-background {
+  background-image: url('../src/assets/DASHBOARD.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
 
-
-
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #f0f2f5;
+  margin: 0;
+  padding: 0;
+}

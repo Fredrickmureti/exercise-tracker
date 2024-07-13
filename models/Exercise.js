@@ -17,6 +17,10 @@ const exerciseSchema = new mongoose.Schema({
   date: {
     type: Date,
     required: true
+  },
+  completed: {
+    type: Boolean,
+    default: false
   }
 });
 
