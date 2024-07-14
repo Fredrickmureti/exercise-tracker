@@ -18,12 +18,12 @@ mongoose.connect(process.env.MONGO_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 })
-.then(() => {
-  console.log('Connected to MongoDB');
-})
-.catch(err => {
-  console.error('Failed to connect to MongoDB', err);
-});
+  .then(() => {
+    console.log('Connected to MongoDB');
+  })
+  .catch(err => {
+    console.error('Failed to connect to MongoDB', err);
+  });
 
 // Authentication middleware
 const authenticateToken = (req, res, next) => {
@@ -46,6 +46,11 @@ app.get('/', (req, res) => {
 app.use('/api/users', require('./routes/user'));
 app.use('/api/exercises', authenticateToken, require('./routes/exercise'));
 app.use('/api/exercises', authenticateToken, require('./routes/deleteUpdate'));
+
+// Handle 404 errors for non-API routes
+app.use((req, res, next) => {
+  res.status(404).send('404: Not Found');
+});
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
