@@ -15,7 +15,7 @@ const ExerciseLog = ({ userId }) => {
     const fetchExercises = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await fetch(`http://localhost:3000/api/exercises/${userId}`, {
+        const response = await fetch(`https://backend-exercise-tracker-seven.vercel.app/exercises/${userId}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -70,7 +70,7 @@ const ExerciseLog = ({ userId }) => {
           onClick: async () => {
             try {
               const token = localStorage.getItem('token');
-              const response = await fetch(`http://localhost:3000/api/exercises/${id}`, {
+              const response = await fetch(`https://backend-exercise-tracker-seven.vercel.app/exercises/${id}`, {
                 method: 'DELETE',
                 headers: {
                   'Authorization': `Bearer ${token}`
@@ -118,7 +118,7 @@ const ExerciseLog = ({ userId }) => {
 
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`http://localhost:3000/api/exercises/${_id}`, {
+      const response = await fetch(`https://backend-exercise-tracker-seven.vercel.app/exercises/${_id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -147,7 +147,7 @@ const ExerciseLog = ({ userId }) => {
     const updatedExercise = { ...exercise, completed: !exercise.completed };
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`http://localhost:3000/api/exercises/${exercise._id}`, {
+      const response = await fetch(`https://backend-exercise-tracker-seven.vercel.app/exercises/${exercise._id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

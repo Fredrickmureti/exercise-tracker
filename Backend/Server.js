@@ -9,7 +9,11 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: 'https://exercise-tracker-ptse10ozv-fredrick-lugards-projects.vercel.app', // Allow requests from the frontend URL
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true
+}));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -17,7 +21,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 mongoose.connect(process.env.MONGO_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true
-});
+})
+  .then(() => {
+    console.log('Connected to MongoDB');
+  })
+  .catch(err => {
+    console.error('Failed to connect to MongoDB', err);
+  });
 
 // Authentication middleware
 const authenticateToken = (req, res, next) => {
@@ -30,6 +40,11 @@ const authenticateToken = (req, res, next) => {
     next();
   });
 };
+
+// Root route to display welcome message
+app.get('/', (req, res) => {
+  res.send('Welcome to Exercise Tracker Backend API');
+});
 
 // Define routes
 app.use('/api/users', require('./routes/user'));

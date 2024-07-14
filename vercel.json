@@ -21,11 +21,11 @@
     },
     {
       "src": "/(.*)",
-      "dest": "exercise-tracker-client/build/$1"
+      "dest": "exercise-tracker-client/build/index.html"
     }
   ],
   "env": {
-    "REACT_APP_API_URL": "https://your-vercel-deployment-url/api"
+    "REACT_APP_API_URL": "https://backend-exercise-tracker-seven.vercel.app/api"
   },
   "build": {
     "env": {
