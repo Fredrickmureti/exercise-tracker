@@ -1,19 +1,18 @@
 {
   "version": 2,
-  "name": "exercise-tracker-client",
   "builds": [
     {
       "src": "package.json",
       "use": "@vercel/static-build",
       "config": {
-        "distDir": "dist"
+        "distDir": "dist" 
       }
     }
   ],
   "routes": [
     {
-      "src": "/api/(.*)",
-      "dest": "https://backend-exercise-tracker-seven.vercel.app/api/$1"
+      "src": "/assets/(.*)",
+      "dest": "/assets/$1"
     },
     {
       "src": "/(.*)",
