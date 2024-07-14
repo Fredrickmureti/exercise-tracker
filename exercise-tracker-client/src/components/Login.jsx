@@ -11,7 +11,7 @@ const Login = ({ setUser }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const response = await fetch('https://backend-exercise-tracker-seven.vercel.app/users/login', {
+    const response = await fetch('https://backend-exercise-tracker-seven.vercel.app/api/users/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
