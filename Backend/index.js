@@ -9,7 +9,7 @@ const app = express();
 
 // CORS options
 const corsOptions = {
-  origin: 'https://exercise-tracker-arena.vercel.app', // Frontend URL
+  origin: 'https://exercise-tracker-arena.vercel.app', // Frontend URL here
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
   optionsSuccessStatus: 204
