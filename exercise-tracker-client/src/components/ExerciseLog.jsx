@@ -6,6 +6,7 @@ import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import NavigationPane from './NavigationPane';
 import { Link } from 'react-router-dom';
+const apiUrl = 'https://backend-gules-seven-67.vercel.app/api'
 
 const ExerciseLog = ({ userId }) => {
   const [exercises, setExercises] = useState([]);
@@ -15,7 +16,7 @@ const ExerciseLog = ({ userId }) => {
     const fetchExercises = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await fetch(`https://backend-gules-seven-67.vercel.app/api/exercises/${userId}`, {
+        const response = await fetch(`${apiUrl}/exercises/${userId}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -70,7 +71,7 @@ const ExerciseLog = ({ userId }) => {
           onClick: async () => {
             try {
               const token = localStorage.getItem('token');
-              const response = await fetch(`https://backend-gules-seven-67.vercel.app/api/exercises/${id}`, {
+              const response = await fetch(`${apiUrl}/exercises/${id}`, {
                 method: 'DELETE',
                 headers: {
                   'Authorization': `Bearer ${token}`
@@ -118,7 +119,7 @@ const ExerciseLog = ({ userId }) => {
 
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`https://backend-gules-seven-67.vercel.app/api/exercises/${_id}`, {
+      const response = await fetch(`${apiUrl}/exercises/${_id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -147,7 +148,7 @@ const ExerciseLog = ({ userId }) => {
     const updatedExercise = { ...exercise, completed: !exercise.completed };
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`https://backend-gules-seven-67.vercel.app/api/exercises/${exercise._id}`, {
+      const response = await fetch(`${apiUrl}/exercises/${exercise._id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

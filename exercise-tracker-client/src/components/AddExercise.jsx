@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './AddExercise.css';
 import NavigationPane from './NavigationPane';
-
+const apiUrl = 'https://backend-gules-seven-67.vercel.app/api'
 const AddExercise = ({ userId }) => {
   const [description, setDescription] = useState('');
   const [duration, setDuration] = useState(0);
@@ -13,7 +13,7 @@ const AddExercise = ({ userId }) => {
 
     const formattedDate = new Date(`${date}T${time}`).toISOString();
 
-    const response = await fetch('https://backend-gules-seven-67.vercel.app/api/exercises', {
+    const response = await fetch(`${apiUrl}/exercises`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

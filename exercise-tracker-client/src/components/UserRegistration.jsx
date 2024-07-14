@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './UserRegistration.css';
+const apiUrl = 'https://backend-gules-seven-67.vercel.app/api'
+
 
 const UserRegistration = ({ setUser }) => {
   const [firstName, setFirstName] = useState('');
@@ -14,7 +16,7 @@ const UserRegistration = ({ setUser }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const response = await fetch('https://backend-gules-seven-67.vercel.app/api/users/register', {
+    const response = await fetch(`${apiUrl}/users/register`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

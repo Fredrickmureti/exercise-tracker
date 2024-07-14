@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Login.css';
+const apiUrl = 'https://backend-gules-seven-67.vercel.app/api'
 
 const Login = ({ setUser }) => {
   const [email, setEmail] = useState('');
@@ -11,7 +12,7 @@ const Login = ({ setUser }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const response = await fetch('https://backend-exercise-tracker-seven.vercel.app/api/users/login', {
+    const response = await fetch(`${apiUrl}/users/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
