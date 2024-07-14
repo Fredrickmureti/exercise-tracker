@@ -1,9 +1,7 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "dependencies": {
 
-  },
   "scripts": {
     "start": "node server.js",
     "postinstall": "npm install --legacy-peer-deps"
