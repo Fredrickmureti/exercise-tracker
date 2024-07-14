@@ -13,7 +13,7 @@ const AddExercise = ({ userId }) => {
 
     const formattedDate = new Date(`${date}T${time}`).toISOString();
 
-    const response = await fetch('https://backend-exercise-tracker-seven.vercel.app/exercises', {
+    const response = await fetch('https://backend-gules-seven-67.vercel.app/exercises', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
