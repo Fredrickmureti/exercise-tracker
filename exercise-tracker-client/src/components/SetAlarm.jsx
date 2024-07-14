@@ -1,11 +1,12 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import './SetAlarm.css';
 import { toast } from 'react-toastify';
 import { FaTrash, FaEdit } from 'react-icons/fa';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
+import Sound from 'react-sound';
 
-const SetAlarm = () => {
+const SetAlarm = ({ isDetailPage = false }) => {
   const [alarmTime, setAlarmTime] = useState('');
   const [alarmLabel, setAlarmLabel] = useState('');
   const [currentTime, setCurrentTime] = useState(new Date().toLocaleTimeString());
@@ -16,8 +17,6 @@ const SetAlarm = () => {
   const [editingAlarm, setEditingAlarm] = useState(null);
   const [playingAlarm, setPlayingAlarm] = useState(null);
   const [testSound, setTestSound] = useState(false);
-
-  const alarmSoundRef = useRef(null);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -31,8 +30,6 @@ const SetAlarm = () => {
     alarms.forEach(alarm => {
       if (alarm.time === currentTime) {
         setPlayingAlarm(alarm);
-        alarmSoundRef.current.currentTime = 0;
-        alarmSoundRef.current.play();
         confirmAlert({
           title: `Alarm for ${alarm.label}`,
           message: 'What would you like to do?',
@@ -40,7 +37,6 @@ const SetAlarm = () => {
             {
               label: 'Stop',
               onClick: () => {
-                alarmSoundRef.current.pause();
                 setPlayingAlarm(null);
                 setAlarms(prevAlarms => prevAlarms.filter(a => a !== alarm));
               }
@@ -48,11 +44,9 @@ const SetAlarm = () => {
             {
               label: 'Snooze',
               onClick: () => {
-                alarmSoundRef.current.pause();
                 setPlayingAlarm(null);
                 setTimeout(() => {
                   setPlayingAlarm(alarm);
-                  alarmSoundRef.current.play();
                 }, 600000); // Snooze for 10 minutes
               }
             }
@@ -60,7 +54,6 @@ const SetAlarm = () => {
         });
 
         setTimeout(() => {
-          alarmSoundRef.current.pause();
           setPlayingAlarm(null);
         }, 60000); // Stop the alarm after 1 minute if no action is taken
       }
@@ -121,17 +114,20 @@ const SetAlarm = () => {
   };
 
   const testAlarmSound = () => {
-    alarmSoundRef.current.currentTime = 0;
-    alarmSoundRef.current.play();
     setTestSound(true);
     setTimeout(() => {
-      alarmSoundRef.current.pause();
       setTestSound(false);
     }, 5000); // Play the test sound for 5 seconds
   };
 
   return (
-    <div className="set-alarm-page">
+    <div className={isDetailPage ? "set-alarm-page" : "set-alarm"}>
+      {isDetailPage && (
+        <video className="background-video" autoPlay loop muted>
+          <source src="/assets/background.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+      )}
       <div className="set-alarm">
         <h2>{editingAlarm ? 'Modify Alarm' : 'Set Alarm'}</h2>
         <div className="current-time">
@@ -176,7 +172,19 @@ const SetAlarm = () => {
           </ul>
         </div>
         <button onClick={testAlarmSound}>Test Alarm Sound</button>
-        <audio ref={alarmSoundRef} id="audioElement" crossOrigin="anonymous" src="../assets/ALARM.wav"></audio>
+        {playingAlarm && (
+          <Sound
+            url="/assets/ALARM.wav"
+            playStatus={Sound.status.PLAYING}
+            loop={true}
+          />
+        )}
+        {testSound && (
+          <Sound
+            url="/assets/ALARM.wav"
+            playStatus={Sound.status.PLAYING}
+          />
+        )}
       </div>
     </div>
   );

@@ -19,7 +19,7 @@ const Dashboard = ({ user, handleLogout }) => {
         <button className="dashboard-button" onClick={() => navigate('/exercise-log')}>View Exercises</button>
         <button className="dashboard-button" onClick={handleLogout}>Logout</button>
       </div>
-      <div className="time-weather-section" style={{ backgroundImage: "url('/assets/TIME.png')" }}>
+      <div className="time-weather-section">
         <Clock />
         <Stopwatch />
         <Weather />

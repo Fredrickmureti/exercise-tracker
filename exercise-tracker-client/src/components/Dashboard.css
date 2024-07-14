@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Pacifico&display=swap');
 
 body.dashboard-background {
-  background-image: url('../assets/DASHBOARD.jpg');
+  background-image: url('/assets/DASHBOARD.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -15,6 +15,11 @@ body.dashboard-background {
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   animation: fadeIn 2s ease-in-out;
+  max-height: 100vh;
+  overflow-y: auto;
+  margin: 0 auto;
+  max-width: 90%;
+  /* Increased max-width to take up more space */
 }
 
 .welcome-message {
@@ -26,11 +31,13 @@ body.dashboard-background {
 
 .dashboard-buttons {
   margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
 }
 
 .dashboard-button {
   padding: 10px 20px;
-  margin: 10px;
   font-size: 1.2em;
   border: none;
   border-radius: 5px;
@@ -44,15 +51,19 @@ body.dashboard-background {
 
 .time-weather-section {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-around;
   align-items: center;
   margin-top: 50px;
   padding: 20px;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+}
+
+.time-weather-section>div {
+  flex: 1 1 300px;
+  margin: 10px;
 }
 
 @keyframes fadeIn {
