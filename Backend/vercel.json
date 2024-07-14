@@ -12,5 +12,11 @@
       "src": "/api/(.*)",
       "dest": "/server.js"
     }
-  ]
+  ],
+  "build": {
+    "env": {
+      "NPM_FLAGS": "--legacy-peer-deps"
+    },
+    "installCommand": "npm install --legacy-peer-deps"
+  }
 }
