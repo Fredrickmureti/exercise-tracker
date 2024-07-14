@@ -26,5 +26,10 @@
   ],
   "env": {
     "REACT_APP_API_URL": "https://your-vercel-deployment-url/api"
+  },
+  "build": {
+    "env": {
+      "NPM_FLAGS": "--legacy-peer-deps"
+    }
   }
 }
