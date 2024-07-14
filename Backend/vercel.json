@@ -13,7 +13,6 @@
     },
     {
       "src": "/(.*)",
-      "status": 404,
       "dest": "/server.js"
     }
   ]
