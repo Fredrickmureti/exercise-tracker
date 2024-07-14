@@ -1,0 +1,30 @@
+{
+  "version": 2,
+  "name": "exercise-tracker",
+  "builds": [
+    {
+      "src": "exercise-tracker-client/package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "exercise-tracker-client/build"
+      }
+    },
+    {
+      "src": "backend/server.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/backend/server.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "exercise-tracker-client/build/$1"
+    }
+  ],
+  "env": {
+    "REACT_APP_API_URL": "https://your-vercel-deployment-url/api"
+  }
+}
