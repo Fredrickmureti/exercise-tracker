@@ -14,7 +14,7 @@ const UserRegistration = ({ setUser }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const response = await fetch('https://backend-gules-seven-67.vercel.app/users/register', {
+    const response = await fetch('https://backend-gules-seven-67.vercel.app/api/users/register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
