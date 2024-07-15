@@ -10,7 +10,7 @@ html {
 }
 
 body.dashboard-background {
-  background-image: url('/assets/DASHBOARD.png');
+  background-image: url('../assets/DASHBOARD.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
