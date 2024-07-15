@@ -1,3 +1,4 @@
+/* NavigationPane.css */
 .navigation-pane {
   display: flex;
   justify-content: center;
@@ -19,4 +20,33 @@
 
 .nav-link:hover {
   background-color: #2980b9;
+}
+
+/* Media Queries for Responsive Design */
+@media (max-width: 768px) {
+  .navigation-pane {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .nav-link {
+    width: 100%;
+    justify-content: center;
+    padding: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .navigation-pane {
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .nav-link {
+    width: 100%;
+    justify-content: center;
+    padding: 8px;
+  }
 }

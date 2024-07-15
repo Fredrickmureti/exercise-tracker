@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './AddExercise.css';
 import NavigationPane from './NavigationPane';
 const apiUrl = 'https://backend-gules-seven-67.vercel.app/api'
+//const apiUrl = 'http://localhost:3000/api';
 const AddExercise = ({ userId }) => {
   const [description, setDescription] = useState('');
   const [duration, setDuration] = useState(0);

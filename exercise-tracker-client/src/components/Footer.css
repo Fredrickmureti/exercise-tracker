@@ -7,10 +7,26 @@
   padding: 20px;
   text-align: center;
   position: relative;
-  bottom: 0;
-  width: 100%;
+  bottom: -390px;
+  max-width: 900px;
   animation: fadeIn 2s ease-in-out;
+
 }
+
+/* creating a medeai qiesry fore the screens smaller than 600px */
+@media screen and (max-width: 600px) {
+  .footer {
+    bottom: -1000px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .footer {
+    bottom: -1500px;
+  }
+}
+
+
 
 .footer-content {
   display: flex;

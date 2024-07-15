@@ -7,7 +7,7 @@ import 'react-confirm-alert/src/react-confirm-alert.css';
 import NavigationPane from './NavigationPane';
 import { Link } from 'react-router-dom';
 const apiUrl = 'https://backend-gules-seven-67.vercel.app/api'
-
+//const apiUrl = 'http://localhost:3000/api';
 const ExerciseLog = ({ userId }) => {
   const [exercises, setExercises] = useState([]);
   const [editingExercise, setEditingExercise] = useState(null);

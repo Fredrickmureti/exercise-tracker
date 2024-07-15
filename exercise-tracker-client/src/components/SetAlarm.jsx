@@ -128,7 +128,7 @@ const SetAlarm = ({ isDetailPage = false }) => {
           Your browser does not support the video tag.
         </video>
       )}
-      <div className="set-alarm">
+      <div className="set-alarm-container">
         <h2>{editingAlarm ? 'Modify Alarm' : 'Set Alarm'}</h2>
         <div className="current-time">
           <h3>Current Time: {currentTime}</h3>

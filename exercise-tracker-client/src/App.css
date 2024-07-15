@@ -5,12 +5,13 @@ body.auth-background {
   background-repeat: no-repeat;
 }
 
+/*
 body.dashboard-background {
   background-image: url('../src/assets/DASHBOARD.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-}
+}*/
 
 body {
   font-family: 'Roboto', sans-serif;

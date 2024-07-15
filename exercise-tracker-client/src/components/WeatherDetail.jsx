@@ -55,7 +55,7 @@ const WeatherDetail = () => {
   return (
     <div className="weather-detail-page">
       <video className="background-video" autoPlay loop muted>
-        <source src="/assets/background.mp4" type="video/mp4" />
+        <source src="../assets/WEATHER_VIDEO.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
       <div className="weather-detail">

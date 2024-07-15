@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './UserRegistration.css';
 const apiUrl = 'https://backend-gules-seven-67.vercel.app/api'
-
+//const apiUrl = 'http://localhost:3000/api';
 
 const UserRegistration = ({ setUser }) => {
   const [firstName, setFirstName] = useState('');

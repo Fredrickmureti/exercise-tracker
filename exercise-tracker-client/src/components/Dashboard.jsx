@@ -22,8 +22,12 @@ const Dashboard = ({ user, handleLogout }) => {
       <div className="time-weather-section">
         <Clock />
         <Stopwatch />
-        <Weather />
-        <SetAlarm />
+        <div>
+          <Weather />
+        </div>
+        <div>
+          <SetAlarm />
+        </div>
       </div>
     </div>
   );

@@ -36,10 +36,16 @@ body {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   animation: fadeIn 2s ease-in-out;
   max-height: 90%;
-  max-width: 80%;
-  overflow-y: auto;
   width: 100%;
-  max-width: 500px;
+  max-width: 600px;
+  /* Increased max-width for the outer div */
+  overflow-y: auto;
+}
+
+.set-alarm-container {
+  width: 100%;
+  max-width: 100%;
+  /* Ensure the inner div takes full width */
 }
 
 h2 {
@@ -193,5 +199,42 @@ button:hover {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+/* Media Queries for Responsive Design */
+@media (max-width: 768px) {
+  .set-alarm {
+    max-width: 90%;
+  }
+
+  h2 {
+    font-size: 2em;
+  }
+
+  .current-time h3 {
+    font-size: 1.2em;
+  }
+
+  .alarms-list li {
+    font-size: 1em;
+  }
+}
+
+@media (max-width: 480px) {
+  .set-alarm {
+    max-width: 100%;
+  }
+
+  h2 {
+    font-size: 1.8em;
+  }
+
+  .current-time h3 {
+    font-size: 1em;
+  }
+
+  .alarms-list li {
+    font-size: 0.9em;
   }
 }

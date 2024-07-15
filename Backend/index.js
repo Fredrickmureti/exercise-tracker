@@ -7,9 +7,10 @@ const jwt = require('jsonwebtoken');
 
 const app = express();
 
+
 // CORS options
 const corsOptions = {
-  origin: 'https://exercise-tracker-arena.vercel.app', // Frontend URL here
+  origin: ['https://exercise-tracker-arena.vercel.app', 'http://localhost:5173'], // Frontend URL here
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
   optionsSuccessStatus: 204
@@ -57,6 +58,12 @@ app.use('/api/exercises', authenticateToken, require('./routes/deleteUpdate'));
 // Handle 404 errors for non-API routes
 app.use((req, res, next) => {
   res.status(404).send('404: Not Found');
+});
+
+// server should listen at port 3000 hence the url is http://localhost:3000
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
 
 module.exports = app;
