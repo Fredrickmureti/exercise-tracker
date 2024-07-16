@@ -6,7 +6,7 @@ html {
   padding: 0;
   height: 100%;
   width: 100%;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 body.dashboard-background {
@@ -18,21 +18,29 @@ body.dashboard-background {
   width: 100%;
 }
 
+.dashboard-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.9);
+  overflow-y: auto;
+}
+
 .dashboard {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100%;
-  width: 100%;
   text-align: center;
-  padding: 20px;
-  background-color: rgba(255, 255, 255, 0.9);
-  /* Slightly transparent background */
+  width: 100%;
+  max-width: 1200px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   animation: fadeIn 2s ease-in-out;
-  overflow-y: auto;
+  background-color: rgba(240, 248, 255, 0.562);
 }
 
 .welcome-message {
@@ -48,7 +56,6 @@ body.dashboard-background {
   justify-content: center;
   gap: 20px;
   flex-wrap: wrap;
-  /* Ensure buttons wrap on smaller screens */
   margin-bottom: 20px;
 }
 
@@ -68,26 +75,21 @@ body.dashboard-background {
 .time-weather-section {
   display: flex;
   flex-wrap: wrap;
-  /* Ensure items wrap on smaller screens */
   justify-content: space-around;
   align-items: center;
   width: 100%;
   gap: 20px;
-  /* Add some space between items */
 }
 
 .time-weather-section>div {
   flex: 1 1 400px;
-  /* Increased width for the container */
   margin: 10px;
   background-color: rgba(255, 255, 255, 0.9);
-  /* Slightly transparent background */
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   overflow: hidden;
-  /* Remove scrollbar */
 }
 
 .time-weather-section>div:hover {
@@ -119,6 +121,19 @@ body.dashboard-background {
   .time-weather-section>div {
     flex: 1 1 100%;
     margin: 10px 0;
+    padding: 10px;
+  }
+
+  .time-weather-section .set-alarm,
+  .time-weather-section .weather {
+    flex: 1 1 100%;
+    margin: 10px 0;
+  }
+
+  input {
+    width: 100%;
+    max-width: 95%;
+    box-sizing: border-box;
   }
 }
 
@@ -135,5 +150,18 @@ body.dashboard-background {
   .time-weather-section>div {
     flex: 1 1 100%;
     margin: 5px 0;
+    padding: 10px;
+  }
+
+  .time-weather-section .set-alarm,
+  .time-weather-section .weather {
+    flex: 1 1 100%;
+    margin: 5px 0;
+  }
+
+  input {
+    width: 100%;
+    max-width: 90%;
+    box-sizing: border-box;
   }
 }
