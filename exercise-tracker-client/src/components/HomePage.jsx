@@ -1,10 +1,12 @@
 import React from 'react';
 import { useSpring, animated } from 'react-spring';
-import { FaClock, FaCheckCircle, FaTasks } from 'react-icons/fa';
+import { FaClock, FaCheckCircle, FaTasks, FaSignInAlt } from 'react-icons/fa';
 import ReactPlayer from 'react-player';
+import { useNavigate } from 'react-router-dom';
 import './HomePage.css';
 
 const HomePage = () => {
+  const navigate = useNavigate();
   const fadeIn = useSpring({ opacity: 1, from: { opacity: 0 }, delay: 500 });
   const slideIn = useSpring({ transform: 'translateY(0px)', from: { transform: 'translateY(-50px)' }, delay: 700 });
 
@@ -39,6 +41,12 @@ const HomePage = () => {
             <FaTasks size={50} />
             <h3>Manage Tasks</h3>
             <p>Organize your exercises and tasks efficiently.</p>
+          </div>
+        </animated.div>
+        <animated.div style={slideIn} className="navigation-icons">
+          <div className="nav-icon" onClick={() => navigate('/login')}>
+            <FaSignInAlt size={50} />
+            <p>Login</p>
           </div>
         </animated.div>
       </div>
