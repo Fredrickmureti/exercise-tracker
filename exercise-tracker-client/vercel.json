@@ -15,6 +15,14 @@
       "dest": "/public/audio/$1"
     },
     {
+      "src": "/videos/(.*)",
+      "dest": "/public/videos/$1"
+    },
+    {
+      "src": "/images/(.*)",
+      "dest": "/public/images/$1"
+    },
+    {
       "src": "/assets/(.*)",
       "dest": "/assets/$1"
     },

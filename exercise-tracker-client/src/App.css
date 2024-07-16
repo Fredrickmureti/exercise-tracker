@@ -1,12 +1,12 @@
 body.auth-background {
-  background-image: url('../public/images/Register.jpg');
+  background-image: url('/images/Register.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
 
 body.dashboard-background {
-  background-image: url('../public/images/DASHBOARD.jpg');
+  background-image: url('/images/DASHBOARD.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
