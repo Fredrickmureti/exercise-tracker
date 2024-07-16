@@ -52,12 +52,13 @@ const App = () => {
           muted
           playsInline
         >
-          <source src="/videos/WEATHER_VIDEO.mp4" type="video/mp4" />
+          <source src="/videos/HOMEPage.mp4" type="video/mp4" />
         </video>
       )}
       <div className="content-container">
         <Routes>
-          <Route path="/" element={<HomePage />} />
+          <Route path="/" element={<Navigate to="/home" />} />
+          <Route path="/home" element={<HomePage />} />
           <Route path="/register" element={<UserRegistration setUser={handleLogin} />} />
           <Route path="/login" element={<Login setUser={handleLogin} />} />
           <Route path="/dashboard" element={user ? <Dashboard user={user} handleLogout={handleLogout} /> : <Navigate to="/login" />} />
