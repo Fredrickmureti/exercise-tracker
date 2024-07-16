@@ -181,7 +181,7 @@ const SetAlarm = ({ isDetailPage = false }) => {
         <button onClick={testAlarmSound}>Test Alarm Sound</button>
         {playingAlarm && (
           <Sound
-            url="../../public/audio/ALARM.wav"
+            url="/audio/ALARM.wav"
             playStatus={Sound.status.PLAYING}
             loop={true}
           />

@@ -1,17 +1,23 @@
 body,
-html,
-#root {
+html {
   height: 100%;
   width: 100%;
   margin: 0;
   padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  overflow-x: hidden;
+  /* Prevent horizontal scroll */
 }
 
 body {
   font-family: 'Roboto', sans-serif;
   background-color: #f0f2f5;
-  overflow: hidden;
+  overflow-y: auto;
+  /* Allow vertical scroll */
+}
+
+#root {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 }
