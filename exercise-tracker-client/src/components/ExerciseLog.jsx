@@ -6,11 +6,15 @@ import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import NavigationPane from './NavigationPane';
 import { Link } from 'react-router-dom';
-const apiUrl = 'https://backend-gules-seven-67.vercel.app/api'
-//const apiUrl = 'http://localhost:3000/api';
+
+const apiUrl = 'https://backend-gules-seven-67.vercel.app/api';
+// const apiUrl = 'http://localhost:3000/api'; // Local API URL
+
 const ExerciseLog = ({ userId }) => {
   const [exercises, setExercises] = useState([]);
   const [editingExercise, setEditingExercise] = useState(null);
+  const [playingAlarm, setPlayingAlarm] = useState(null);
+  const [audio] = useState(new Audio('/audio/TASKDUE.mp3')); // Initialize audio element
 
   useEffect(() => {
     const fetchExercises = async () => {
@@ -44,22 +48,45 @@ const ExerciseLog = ({ userId }) => {
       exercises.forEach(exercise => {
         const exerciseDate = new Date(exercise.date);
         if (exerciseDate <= now && !exercise.completed) {
-          toast.info(`Task "${exercise.description}" is due!`, {
+          setPlayingAlarm(exercise);
+          const toastId = toast.info(`Task "${exercise.description}" is due!`, {
             position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
+            autoClose: false,
+            closeOnClick: false,
+            draggable: false,
+            onClose: () => handleStopAlarm(),
+            render: ({ closeToast }) => (
+              <div>
+                <p>Task "{exercise.description}" is due!</p>
+                <button onClick={() => handleStopAlarm(toastId)}>Stop</button>
+              </div>
+            )
           });
+
+          // Play audio notification
+          audio.loop = true;
+          audio.play();
         }
       });
     };
 
     const interval = setInterval(checkDueTasks, 60000); // Check every minute
-    return () => clearInterval(interval);
-  }, [exercises]);
+    return () => {
+      clearInterval(interval);
+      handleStopAlarm(); // Ensure alarm stops when component unmounts
+    };
+  }, [exercises, audio]);
+
+  const handleStopAlarm = (toastId) => {
+    setPlayingAlarm(null);
+    if (toastId) {
+      toast.dismiss(toastId);
+    }
+    if (!audio.paused) {
+      audio.pause();
+      audio.currentTime = 0;
+    }
+  };
 
   const handleDelete = async (id) => {
     confirmAlert({
@@ -88,6 +115,9 @@ const ExerciseLog = ({ userId }) => {
                   draggable: true,
                   progress: undefined,
                 });
+                if (playingAlarm && playingAlarm._id === id) {
+                  handleStopAlarm(); // Stop alarm if deleted exercise is playing alarm
+                }
               } else {
                 console.error('Failed to delete exercise');
               }
@@ -131,6 +161,9 @@ const ExerciseLog = ({ userId }) => {
         const updatedExercise = await response.json();
         setExercises(exercises.map(ex => ex._id === _id ? updatedExercise : ex));
         setEditingExercise(null);
+        if (playingAlarm && playingAlarm._id === _id && completed) {
+          handleStopAlarm(); // Stop alarm if updated exercise is playing alarm and marked completed
+        }
       } else {
         console.error('Failed to update exercise');
       }
@@ -159,6 +192,9 @@ const ExerciseLog = ({ userId }) => {
       if (response.ok) {
         const updatedExerciseData = await response.json();
         setExercises(exercises.map(ex => ex._id === exercise._id ? updatedExerciseData : ex));
+        if (updatedExerciseData.completed && playingAlarm && playingAlarm._id === exercise._id) {
+          handleStopAlarm(); // Stop alarm if toggled exercise is playing alarm and marked completed
+        }
       } else {
         console.error('Failed to update exercise');
       }
