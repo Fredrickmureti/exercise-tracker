@@ -9,7 +9,8 @@ import Dashboard from './components/Dashboard';
 import SetAlarm from './components/SetAlarm';
 import WeatherDetail from './components/WeatherDetail';
 import Footer from './components/Footer';
-import {jwtDecode as jwt_decode }from 'jwt-decode';
+import HomePage from './components/HomePage';
+import { jwtDecode as jwt_decode } from 'jwt-decode';
 import './App.css';
 
 const App = () => {
@@ -44,6 +45,7 @@ const App = () => {
   return (
     <div className="container">
       <Routes>
+        <Route path="/" element={<HomePage />} />
         <Route path="/register" element={<UserRegistration setUser={handleLogin} />} />
         <Route path="/login" element={<Login setUser={handleLogin} />} />
         <Route path="/dashboard" element={user ? <Dashboard user={user} handleLogout={handleLogout} /> : <Navigate to="/login" />} />
@@ -52,7 +54,6 @@ const App = () => {
         <Route path="/set-alarm" element={user ? <SetAlarm isDetailPage={true} /> : <Navigate to="/login" />} />
         <Route path="/weather-detail" element={user ? <WeatherDetail /> : <Navigate to="/login" />} />
         <Route path="/logout" element={<Logout setUser={handleLogout} />} />
-        <Route path="/" element={<Navigate to="/login" />} />
       </Routes>
       <Footer />
     </div>

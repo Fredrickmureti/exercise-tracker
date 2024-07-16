@@ -15,7 +15,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: auto;
+  overflow: hidden;
 }
 
 .background-video {
@@ -36,7 +36,10 @@ body {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   animation: fadeIn 2s ease-in-out;
   max-height: 90%;
-  max-width: 80%;
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  /* Center the container */
   overflow-y: auto;
 }
 
@@ -110,5 +113,35 @@ body {
   to {
     transform: translateY(0);
     opacity: 1;
+  }
+}
+
+/* Media Queries for Responsive Design */
+@media (min-width: 1200px) {
+  .weather-detail {
+    margin-left: -10px;
+    /* Apply margin-right of 90px */
+  }
+}
+
+@media (max-width: 1200px) {
+  .weather-detail {
+    width: 95%;
+  }
+
+  .forecast-item {
+    width: 100%;
+    margin: 10px 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .weather-detail {
+    width: 100%;
+  }
+
+  .forecast-item {
+    width: 100%;
+    margin: 5px 0;
   }
 }

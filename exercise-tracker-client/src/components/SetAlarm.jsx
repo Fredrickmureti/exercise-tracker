@@ -5,11 +5,12 @@ import { FaTrash, FaEdit } from 'react-icons/fa';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import Sound from 'react-sound';
+import 'react-toastify/dist/ReactToastify.css';
 
 const SetAlarm = ({ isDetailPage = false }) => {
   const [alarmTime, setAlarmTime] = useState('');
   const [alarmLabel, setAlarmLabel] = useState('');
-  const [currentTime, setCurrentTime] = useState(new Date().toLocaleTimeString());
+  const [currentTime, setCurrentTime] = useState(new Date().toLocaleTimeString('en-US', { hour12: false }).slice(0, 5));
   const [alarms, setAlarms] = useState(() => {
     const savedAlarms = localStorage.getItem('alarms');
     return savedAlarms ? JSON.parse(savedAlarms) : [];
@@ -20,7 +21,7 @@ const SetAlarm = ({ isDetailPage = false }) => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentTime(new Date().toLocaleTimeString());
+      setCurrentTime(new Date().toLocaleTimeString('en-US', { hour12: false }).slice(0, 5));
     }, 1000);
 
     return () => clearInterval(interval);
@@ -30,27 +31,19 @@ const SetAlarm = ({ isDetailPage = false }) => {
     alarms.forEach(alarm => {
       if (alarm.time === currentTime) {
         setPlayingAlarm(alarm);
-        confirmAlert({
-          title: `Alarm for ${alarm.label}`,
-          message: 'What would you like to do?',
-          buttons: [
-            {
-              label: 'Stop',
-              onClick: () => {
-                setPlayingAlarm(null);
-                setAlarms(prevAlarms => prevAlarms.filter(a => a !== alarm));
-              }
-            },
-            {
-              label: 'Snooze',
-              onClick: () => {
-                setPlayingAlarm(null);
-                setTimeout(() => {
-                  setPlayingAlarm(alarm);
-                }, 600000); // Snooze for 10 minutes
-              }
-            }
-          ]
+        toast.info(`Alarm for ${alarm.label}`, {
+          position: "top-right",
+          autoClose: false,
+          closeOnClick: false,
+          draggable: false,
+          onClose: () => setPlayingAlarm(null),
+          render: ({ closeToast }) => (
+            <div>
+              <p>Alarm for {alarm.label}</p>
+              <button onClick={() => handleStopAlarm(alarm, closeToast)}>Stop</button>
+              <button onClick={() => handleSnoozeAlarm(alarm, closeToast)}>Snooze</button>
+            </div>
+          )
         });
 
         setTimeout(() => {
@@ -111,6 +104,20 @@ const SetAlarm = ({ isDetailPage = false }) => {
     setEditingAlarm(alarmToEdit);
     setAlarmTime(alarmToEdit.time);
     setAlarmLabel(alarmToEdit.label);
+  };
+
+  const handleStopAlarm = (alarm, closeToast) => {
+    setPlayingAlarm(null);
+    setAlarms(prevAlarms => prevAlarms.filter(a => a !== alarm));
+    closeToast();
+  };
+
+  const handleSnoozeAlarm = (alarm, closeToast) => {
+    setPlayingAlarm(null);
+    setTimeout(() => {
+      setPlayingAlarm(alarm);
+    }, 600000); // Snooze for 10 minutes
+    closeToast();
   };
 
   const testAlarmSound = () => {
@@ -174,14 +181,14 @@ const SetAlarm = ({ isDetailPage = false }) => {
         <button onClick={testAlarmSound}>Test Alarm Sound</button>
         {playingAlarm && (
           <Sound
-            url="/assets/ALARM.wav"
+            url="../../public/audio/ALARM.wav"
             playStatus={Sound.status.PLAYING}
             loop={true}
           />
         )}
         {testSound && (
           <Sound
-            url="/assets/ALARM.wav"
+            url="/audio/ALARM.wav"
             playStatus={Sound.status.PLAYING}
           />
         )}

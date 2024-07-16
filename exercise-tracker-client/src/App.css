@@ -1,21 +1,23 @@
 body.auth-background {
-  background-image: url('../src/assets/Register.jpg');
+  background-image: url('../public/images/Register.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
 
-/*
 body.dashboard-background {
-  background-image: url('../src/assets/DASHBOARD.jpg');
+  background-image: url('../public/images/DASHBOARD.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-}*/
+}
 
 body {
   font-family: 'Roboto', sans-serif;
   background-color: #f0f2f5;
   margin: 0;
   padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
 }

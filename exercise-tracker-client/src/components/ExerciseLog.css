@@ -240,3 +240,33 @@ h2 {
 .react-confirm-alert-button-group button:hover {
   background-color: #2980b9;
 }
+
+/* Media Queries for Responsive Design */
+@media (max-width: 768px) {
+  .exercise-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .exercise-actions {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+
+  .exercise-button {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .exercise-log {
+    padding: 10px;
+  }
+
+  .exercise-button {
+    font-size: 1em;
+    padding: 8px;
+  }
+}
