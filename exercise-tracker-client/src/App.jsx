@@ -43,19 +43,32 @@ const App = () => {
   };
 
   return (
-    <div className="container">
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/register" element={<UserRegistration setUser={handleLogin} />} />
-        <Route path="/login" element={<Login setUser={handleLogin} />} />
-        <Route path="/dashboard" element={user ? <Dashboard user={user} handleLogout={handleLogout} /> : <Navigate to="/login" />} />
-        <Route path="/add-exercise" element={user ? <AddExercise userId={user._id} /> : <Navigate to="/login" />} />
-        <Route path="/exercise-log" element={user ? <ExerciseLog userId={user._id} /> : <Navigate to="/login" />} />
-        <Route path="/set-alarm" element={user ? <SetAlarm isDetailPage={true} /> : <Navigate to="/login" />} />
-        <Route path="/weather-detail" element={user ? <WeatherDetail /> : <Navigate to="/login" />} />
-        <Route path="/logout" element={<Logout setUser={handleLogout} />} />
-      </Routes>
-      <Footer />
+    <div className="root-container">
+      {location.pathname === '/' && (
+        <video
+          className="background-video"
+          autoPlay
+          loop
+          muted
+          playsInline
+        >
+          <source src="/videos/WEATHER_VIDEO.mp4" type="video/mp4" />
+        </video>
+      )}
+      <div className="content-container">
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/register" element={<UserRegistration setUser={handleLogin} />} />
+          <Route path="/login" element={<Login setUser={handleLogin} />} />
+          <Route path="/dashboard" element={user ? <Dashboard user={user} handleLogout={handleLogout} /> : <Navigate to="/login" />} />
+          <Route path="/add-exercise" element={user ? <AddExercise userId={user._id} /> : <Navigate to="/login" />} />
+          <Route path="/exercise-log" element={user ? <ExerciseLog userId={user._id} /> : <Navigate to="/login" />} />
+          <Route path="/set-alarm" element={user ? <SetAlarm isDetailPage={true} /> : <Navigate to="/login" />} />
+          <Route path="/weather-detail" element={user ? <WeatherDetail /> : <Navigate to="/login" />} />
+          <Route path="/logout" element={<Logout setUser={handleLogout} />} />
+        </Routes>
+        <Footer />
+      </div>
     </div>
   );
 };
