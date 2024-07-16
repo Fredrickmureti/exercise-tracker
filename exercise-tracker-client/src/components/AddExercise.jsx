@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
 import './AddExercise.css';
 import NavigationPane from './NavigationPane';
-const apiUrl = 'https://backend-gules-seven-67.vercel.app/api'
-//const apiUrl = 'http://localhost:3000/api';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+const apiUrl = 'https://backend-gules-seven-67.vercel.app/api';
+// const apiUrl = 'http://localhost:3000/api';
+
 const AddExercise = ({ userId }) => {
   const [description, setDescription] = useState('');
   const [duration, setDuration] = useState(0);
@@ -14,28 +18,61 @@ const AddExercise = ({ userId }) => {
 
     const formattedDate = new Date(`${date}T${time}`).toISOString();
 
-    const response = await fetch(`${apiUrl}/exercises`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem('token')}`
-      },
-      body: JSON.stringify({
-        userId, description, duration, date: formattedDate
-      })
-    });
+    try {
+      const response = await fetch(`${apiUrl}/exercises`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        },
+        body: JSON.stringify({
+          userId, description, duration, date: formattedDate
+        })
+      });
 
-    if (response.ok) {
-      const exerciseData = await response.json();
+      if (response.ok) {
+        const exerciseData = await response.json();
 
-      setDescription('');
-      setDuration(0);
-      setDate('');
-      setTime('');
-      console.log(exerciseData);
-    } else {
-      const errorData = await response.json();
-      console.error('Error:', errorData);
+        setDescription('');
+        setDuration(0);
+        setDate('');
+        setTime('');
+
+        toast.success('Exercise added successfully!', {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+
+        console.log(exerciseData);
+      } else {
+        const errorText = await response.text();
+        console.error('Error:', errorText);
+        toast.error('Failed to add exercise. Please try again.', {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      toast.error('An unexpected error occurred. Please try again.', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     }
   };
 
