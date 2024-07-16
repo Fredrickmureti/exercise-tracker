@@ -5,11 +5,15 @@
       "src": "package.json",
       "use": "@vercel/static-build",
       "config": {
-        "distDir": "dist" 
+        "distDir": "dist"
       }
     }
   ],
   "routes": [
+    {
+      "src": "/audio/(.*)",
+      "dest": "/public/audio/$1"
+    },
     {
       "src": "/assets/(.*)",
       "dest": "/assets/$1"
