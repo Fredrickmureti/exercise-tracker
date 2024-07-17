@@ -35,12 +35,14 @@ body.dashboard-background {
   justify-content: center;
   align-items: center;
   text-align: center;
-  width: 100%;
+  width: 90%;
   max-width: 1200px;
+  margin: auto;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   animation: fadeIn 2s ease-in-out;
   background-color: rgba(240, 248, 255, 0.562);
+  padding: 20px;
 }
 
 .welcome-message {
@@ -66,6 +68,7 @@ body.dashboard-background {
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  background-color: #f0f0f0;
 }
 
 .dashboard-button:hover {
@@ -76,7 +79,7 @@ body.dashboard-background {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  align-items: center;
+  align-items: stretch;
   width: 100%;
   gap: 20px;
 }
@@ -90,11 +93,19 @@ body.dashboard-background {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .time-weather-section>div:hover {
   transform: scale(1.05);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.weather-container,
+.set-alarm-container {
+  height: 100%;
+  /* Ensures both containers stretch to the same height */
 }
 
 @keyframes fadeIn {
@@ -124,12 +135,6 @@ body.dashboard-background {
     padding: 10px;
   }
 
-  .time-weather-section .set-alarm,
-  .time-weather-section .weather {
-    flex: 1 1 100%;
-    margin: 10px 0;
-  }
-
   input {
     width: 100%;
     max-width: 95%;
@@ -151,12 +156,6 @@ body.dashboard-background {
     flex: 1 1 100%;
     margin: 5px 0;
     padding: 10px;
-  }
-
-  .time-weather-section .set-alarm,
-  .time-weather-section .weather {
-    flex: 1 1 100%;
-    margin: 5px 0;
   }
 
   input {

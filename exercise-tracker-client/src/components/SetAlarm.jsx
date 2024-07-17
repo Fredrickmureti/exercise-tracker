@@ -131,7 +131,7 @@ const SetAlarm = ({ isDetailPage = false }) => {
     <div className={isDetailPage ? "set-alarm-page" : "set-alarm"}>
       {isDetailPage && (
         <video className="background-video" autoPlay loop muted>
-          <source src="/assets/background.mp4" type="video/mp4" />
+          <source src="/videos/ALARM_VIDEO.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
       )}

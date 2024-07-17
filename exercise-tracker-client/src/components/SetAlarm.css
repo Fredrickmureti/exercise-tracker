@@ -38,14 +38,14 @@ body {
   max-height: 90%;
   width: 100%;
   max-width: 600px;
-  /* Increased max-width for the outer div */
   overflow-y: auto;
+  overflow-x: hidden;
+  /* Ensure no horizontal scroll */
 }
 
 .set-alarm-container {
   width: 100%;
   max-width: 100%;
-  /* Ensure the inner div takes full width */
 }
 
 h2 {
@@ -81,6 +81,8 @@ input {
   border-radius: 5px;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
   animation: inputFadeIn 1s ease-in-out;
+  width: calc(100% - 20px);
+  /* Decreased width slightly */
 }
 
 input:focus {
