@@ -180,14 +180,14 @@ const SetAlarm = ({ isDetailPage = false }) => {
         </div>
         {playingAlarm && (
           <Sound
-            url="/audio/ALARM.wav"
+            url="/audio/RING_TONE.mp3"
             playStatus={Sound.status.PLAYING}
             loop={true}
           />
         )}
         {testSound && (
           <Sound
-            url="/audio/ALARM.wav"
+            url="/audio/RING_TONE.mp3"
             playStatus={Sound.status.PLAYING}
           />
         )}
