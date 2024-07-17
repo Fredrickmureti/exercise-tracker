@@ -8,6 +8,7 @@ import Logout from './components/Logout';
 import Dashboard from './components/Dashboard';
 import SetAlarm from './components/SetAlarm';
 import WeatherDetail from './components/WeatherDetail';
+import StepCounterDetail from './components/StepCounterDetail';
 import Footer from './components/Footer';
 import HomePage from './components/HomePage';
 import { jwtDecode as jwt_decode } from 'jwt-decode';
@@ -66,6 +67,7 @@ const App = () => {
           <Route path="/exercise-log" element={user ? <ExerciseLog userId={user._id} /> : <Navigate to="/login" />} />
           <Route path="/set-alarm" element={user ? <SetAlarm isDetailPage={true} /> : <Navigate to="/login" />} />
           <Route path="/weather-detail" element={user ? <WeatherDetail /> : <Navigate to="/login" />} />
+          <Route path="/step-counter-detail" element={user ? <StepCounterDetail /> : <Navigate to="/login" />} />
           <Route path="/logout" element={<Logout setUser={handleLogout} />} />
         </Routes>
         <Footer />
