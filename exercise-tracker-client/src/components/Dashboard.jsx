@@ -6,6 +6,7 @@ import Clock from './Clock';
 import Weather from './Weather';
 import SetAlarm from './SetAlarm';
 import NavigationPane from './NavigationPane';
+import StepCounter from './StepCounter';
 
 const Dashboard = ({ user, handleLogout }) => {
   const navigate = useNavigate();
@@ -27,6 +28,9 @@ const Dashboard = ({ user, handleLogout }) => {
         </div>
         <div>
           <SetAlarm />
+        </div>
+        <div>
+          <StepCounter/>
         </div>
       </div>
     </div>
