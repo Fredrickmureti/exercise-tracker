@@ -6,7 +6,10 @@ import 'react-toastify/dist/ReactToastify.css';
 import 'react-datepicker/dist/react-datepicker.css';
 import './ProgressTracker.css';
 
-const ProgressTracker = () => {
+//const apiUrl = 'https://backend-gules-seven-67.vercel.app/api';
+ const apiUrl = 'http://localhost:3000/api';
+
+const ProgressTracker = ({ userId }) => {
   const [stepsData, setStepsData] = useState([]);
   const [distanceData, setDistanceData] = useState([]);
   const [caloriesData, setCaloriesData] = useState([]);
@@ -21,60 +24,172 @@ const ProgressTracker = () => {
   const [date, setDate] = useState(new Date());
 
   useEffect(() => {
-    // Fetch data from local storage or API
-    const storedStepsData = JSON.parse(localStorage.getItem('stepsData')) || [];
-    const storedDistanceData = JSON.parse(localStorage.getItem('distanceData')) || [];
-    const storedCaloriesData = JSON.parse(localStorage.getItem('caloriesData')) || [];
-    const storedFoodLog = JSON.parse(localStorage.getItem('foodLog')) || [];
-    const storedWorkoutLog = JSON.parse(localStorage.getItem('workoutLog')) || [];
+    // Fetch data from backend
+    const fetchData = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        const [stepsResponse, distanceResponse, caloriesResponse, foodLogResponse, workoutLogResponse] = await Promise.all([
+          fetch(`${apiUrl}/exercises/${userId}`, {
+            headers: { 'Authorization': `Bearer ${token}` }
+          }),
+          fetch(`${apiUrl}/exercises/${userId}`, {
+            headers: { 'Authorization': `Bearer ${token}` }
+          }),
+          fetch(`${apiUrl}/exercises/${userId}`, {
+            headers: { 'Authorization': `Bearer ${token}` }
+          }),
+          fetch(`${apiUrl}/calorie-logs/${userId}`, {
+            headers: { 'Authorization': `Bearer ${token}` }
+          }),
+          fetch(`${apiUrl}/workout-logs/${userId}`, {
+            headers: { 'Authorization': `Bearer ${token}` }
+          })
+        ]);
 
-    setStepsData(storedStepsData);
-    setDistanceData(storedDistanceData);
-    setCaloriesData(storedCaloriesData);
-    setFoodLog(storedFoodLog);
-    setWorkoutLog(storedWorkoutLog);
-  }, []);
+        if (!stepsResponse.ok || !distanceResponse.ok || !caloriesResponse.ok || !foodLogResponse.ok || !workoutLogResponse.ok) {
+          throw new Error('Failed to fetch data');
+        }
 
-  const handleAddFood = () => {
-    const newFoodLog = [...foodLog, { date, foodItem, calories }];
-    setFoodLog(newFoodLog);
-    localStorage.setItem('foodLog', JSON.stringify(newFoodLog));
-    toast.success('Food log added successfully!', {
-      position: "top-right",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    });
-    setFoodItem('');
-    setCalories(0);
+        const stepsData = await stepsResponse.json();
+        const distanceData = await distanceResponse.json();
+        const caloriesData = await caloriesResponse.json();
+        const foodLog = await foodLogResponse.json();
+        const workoutLog = await workoutLogResponse.json();
+
+        setStepsData(stepsData);
+        setDistanceData(distanceData);
+        setCaloriesData(caloriesData);
+        setFoodLog(foodLog);
+        setWorkoutLog(workoutLog);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        toast.error('Failed to fetch data.', {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
+    };
+
+    fetchData();
+  }, [userId]);
+
+  const handleAddFood = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await fetch(`${apiUrl}/calorie-logs`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({ userId, date, foodItem, calories })
+      });
+
+      if (response.ok) {
+        const newFoodLog = await response.json();
+        setFoodLog([...foodLog, newFoodLog]);
+        toast.success('Food log added successfully!', {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+        setFoodItem('');
+        setCalories(0);
+      } else {
+        const errorText = await response.text();
+        console.error('Error:', errorText);
+        toast.error('Failed to add food log.', {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      toast.error('An unexpected error occurred.', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
   };
 
-  const handleAddWorkout = () => {
-    const newWorkoutLog = [...workoutLog, { date, workoutType, workoutDuration, workoutIntensity, workoutNotes }];
-    setWorkoutLog(newWorkoutLog);
-    localStorage.setItem('workoutLog', JSON.stringify(newWorkoutLog));
-    toast.success('Workout log added successfully!', {
-      position: "top-right",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    });
-    setWorkoutType('');
-    setWorkoutDuration(0);
-    setWorkoutIntensity('');
-    setWorkoutNotes('');
+  const handleAddWorkout = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await fetch(`${apiUrl}/workout-logs`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({ userId, date, workoutType, workoutDuration, workoutIntensity, workoutNotes })
+      });
+
+      if (response.ok) {
+        const newWorkoutLog = await response.json();
+        setWorkoutLog([...workoutLog, newWorkoutLog]);
+        toast.success('Workout log added successfully!', {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+        setWorkoutType('');
+        setWorkoutDuration(0);
+        setWorkoutIntensity('');
+        setWorkoutNotes('');
+      } else {
+        const errorText = await response.text();
+        console.error('Error:', errorText);
+        toast.error('Failed to add workout log.', {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      toast.error('An unexpected error occurred.', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
   };
 
   return (
     <div className="progress-tracker">
-      <h2>Progress Tracker</h2>
-      <div className="graph-container">
+      <h2 className="progress-tracker-title">Progress Tracker</h2>
+      <div className="progress-tracker-graph-container">
         <ResponsiveContainer width="100%" height={300}>
           <LineChart data={stepsData}>
             <CartesianGrid strokeDasharray="3 3" />
@@ -106,9 +221,9 @@ const ProgressTracker = () => {
           </LineChart>
         </ResponsiveContainer>
       </div>
-      <div className="log-container">
-        <h3>Calorie Tracker</h3>
-        <div className="food-log">
+      <div className="progress-tracker-log-container">
+        <h3 className="progress-tracker-subtitle">Calorie Tracker</h3>
+        <div className="progress-tracker-food-log">
           <DatePicker selected={date} onChange={(date) => setDate(date)} />
           <input
             type="text"
@@ -124,8 +239,8 @@ const ProgressTracker = () => {
           />
           <button onClick={handleAddFood}>Add Food</button>
         </div>
-        <h3>Workout Logging</h3>
-        <div className="workout-log">
+        <h3 className="progress-tracker-subtitle">Workout Logging</h3>
+        <div className="progress-tracker-workout-log">
           <DatePicker selected={date} onChange={(date) => setDate(date)} />
           <input
             type="text"

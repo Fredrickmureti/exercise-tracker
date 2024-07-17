@@ -95,6 +95,9 @@ body.dashboard-background {
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  max-width: 100%;
+  overflow-x: hidden;
+  /* Ensures no horizontal scroll */
 }
 
 .time-weather-section>div:hover {
