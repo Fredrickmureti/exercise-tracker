@@ -10,6 +10,7 @@ const StepCounter = () => {
   const [distance, setDistance] = useState(0);
   const [prevPosition, setPrevPosition] = useState(null);
   const [playSound, setPlaySound] = useState(false);
+  const [locationPermission, setLocationPermission] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -18,41 +19,54 @@ const StepCounter = () => {
     if (!isNaN(savedSteps)) {
       setSteps(savedSteps);
     }
-
-    // Initialize location tracking
-    if ('geolocation' in navigator) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          const { latitude, longitude } = position.coords;
-          setPrevPosition({ latitude, longitude });
-          toast.success('Location permission granted! Step counting initiated.', {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
-        },
-        (error) => {
-          console.error('Error getting location:', error);
-          toast.error('Error getting location. Please enable location services to count steps.', {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
-        },
-        { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 }
-      );
-    } else {
-      console.error('Geolocation is not available in this browser.');
-    }
   }, []);
+
+  const handleStartCounting = () => {
+    if (!locationPermission) {
+      if ('geolocation' in navigator) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const { latitude, longitude } = position.coords;
+            setPrevPosition({ latitude, longitude });
+            setLocationPermission(true);
+            toast.success('Location permission granted! Step counting initiated.', {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+            });
+          },
+          (error) => {
+            console.error('Error getting location:', error);
+            toast.error('Error getting location. Please enable location services to count steps.', {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+            });
+          },
+          { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 }
+        );
+      } else {
+        console.error('Geolocation is not available in this browser.');
+        toast.error('Geolocation is not available in this browser. Step counting cannot be initiated.', {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
+    }
+  };
 
   useEffect(() => {
     if (prevPosition) {
@@ -120,7 +134,10 @@ const StepCounter = () => {
   };
 
   return (
-    <div className="step-counter" onClick={() => navigate('/step-counter-detail')}>
+    <div className="step-counter">
+      <button className="start-button" onClick={handleStartCounting}>
+        Start Step Counting
+      </button>
       <h2>Step Counter</h2>
       <p>Steps: {steps}</p>
       <p>Distance: {distance.toFixed(2)} km</p>
