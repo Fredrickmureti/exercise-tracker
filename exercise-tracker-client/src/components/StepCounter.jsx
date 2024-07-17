@@ -13,36 +13,77 @@ const StepCounter = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    // Check if steps are already initialized in local storage
+    const savedSteps = parseInt(localStorage.getItem('steps'), 10);
+    if (!isNaN(savedSteps)) {
+      setSteps(savedSteps);
+    }
+
+    // Initialize location tracking
     if ('geolocation' in navigator) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          setPrevPosition({ latitude, longitude });
+          toast.success('Location permission granted! Step counting initiated.', {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+        },
+        (error) => {
+          console.error('Error getting location:', error);
+          toast.error('Error getting location. Please enable location services to count steps.', {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+        },
+        { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 }
+      );
+    } else {
+      console.error('Geolocation is not available in this browser.');
+    }
+  }, []);
+
+  useEffect(() => {
+    if (prevPosition) {
       const watchId = navigator.geolocation.watchPosition(
         (position) => {
           const { latitude, longitude } = position.coords;
-          if (prevPosition) {
-            const distanceCovered = calculateDistance(
-              prevPosition.latitude,
-              prevPosition.longitude,
-              latitude,
-              longitude
-            );
+          const distanceCovered = calculateDistance(
+            prevPosition.latitude,
+            prevPosition.longitude,
+            latitude,
+            longitude
+          );
 
-            // Only update if the distance is significant to avoid rapid updates
-            if (distanceCovered > 0.01) {
-              setDistance((prevDistance) => prevDistance + distanceCovered);
-              setSteps((prevSteps) => prevSteps + Math.floor(distanceCovered * 1312.33595801)); // Approx steps per meter
-              if (distanceCovered >= 0.5) {
-                setPlaySound(true);
-                toast.info(`You have covered ${Math.floor(distanceCovered * 1000)} meters!`, {
-                  position: "top-right",
-                  autoClose: 5000,
-                  hideProgressBar: false,
-                  closeOnClick: true,
-                  pauseOnHover: true,
-                  draggable: true,
-                  progress: undefined,
-                });
-              }
+          // Only update if the distance is significant to avoid rapid updates
+          if (distanceCovered > 0.01) {
+            setDistance((prevDistance) => prevDistance + distanceCovered);
+            setSteps((prevSteps) => prevSteps + Math.floor(distanceCovered * 1312.33595801)); // Approx steps per meter
+            if (distanceCovered >= 0.5) {
+              setPlaySound(true);
+              toast.info(`You have covered ${Math.floor(distanceCovered * 1000)} meters!`, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+              });
             }
           }
+
           setPrevPosition({ latitude, longitude });
         },
         (error) => {
@@ -52,8 +93,6 @@ const StepCounter = () => {
       );
 
       return () => navigator.geolocation.clearWatch(watchId);
-    } else {
-      console.error('Geolocation is not available in this browser.');
     }
   }, [prevPosition]);
 
@@ -77,7 +116,7 @@ const StepCounter = () => {
       Math.cos(lat1 * (Math.PI / 180)) * Math.cos(lat2 * (Math.PI / 180)) *
       Math.sin(dLon / 2) * Math.sin(dLon / 2);
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    return distance;
+    return R * c; // Distance in kilometers
   };
 
   return (
