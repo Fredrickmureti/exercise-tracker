@@ -18,6 +18,7 @@ const Dashboard = ({ user, handleLogout }) => {
       <div className="dashboard-buttons">
         <button className="dashboard-button" onClick={() => navigate('/add-exercise')}>Add Exercise</button>
         <button className="dashboard-button" onClick={() => navigate('/exercise-log')}>View Exercises</button>
+        <button className="dashboard-button" onClick={() => navigate('/progress-tracker')}>Progress Tracker</button>
         <button className="dashboard-button" onClick={handleLogout}>Logout</button>
       </div>
       <div className="time-weather-section">

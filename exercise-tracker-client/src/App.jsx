@@ -9,6 +9,7 @@ import Dashboard from './components/Dashboard';
 import SetAlarm from './components/SetAlarm';
 import WeatherDetail from './components/WeatherDetail';
 import StepCounterDetail from './components/StepCounterDetail';
+import ProgressTracker from './components/ProgressTracker';
 import Footer from './components/Footer';
 import HomePage from './components/HomePage';
 import { jwtDecode as jwt_decode } from 'jwt-decode';
@@ -28,6 +29,8 @@ const App = () => {
       document.body.className = 'auth-background';
     } else if (path === '/dashboard') {
       document.body.className = 'dashboard-background';
+    } else if (path === '/step-counter-detail') {
+      document.body.className = 'step-counter-detail-background';
     } else {
       document.body.className = '';
     }
@@ -68,8 +71,10 @@ const App = () => {
           <Route path="/set-alarm" element={user ? <SetAlarm isDetailPage={true} /> : <Navigate to="/login" />} />
           <Route path="/weather-detail" element={user ? <WeatherDetail /> : <Navigate to="/login" />} />
           <Route path="/step-counter-detail" element={user ? <StepCounterDetail /> : <Navigate to="/login" />} />
+          <Route path="/progress-tracker" element={user ? <ProgressTracker /> : <Navigate to="/login" />} />
           <Route path="/logout" element={<Logout setUser={handleLogout} />} />
         </Routes>
+        <Footer />
       </div>
     </div>
   );
