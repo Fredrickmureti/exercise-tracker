@@ -1,3 +1,4 @@
+/* Importing Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Pacifico&display=swap');
 
 body {
@@ -238,5 +239,11 @@ button:hover {
 
   .alarms-list li {
     font-size: 0.9em;
+  }
+
+  /* Adjusting the Set Alarm button width and margin for small devices */
+  form button[type="submit"] {
+    width: 95%;
+    margin-left: -2.5%;
   }
 }
