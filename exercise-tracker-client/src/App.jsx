@@ -70,7 +70,6 @@ const App = () => {
           <Route path="/step-counter-detail" element={user ? <StepCounterDetail /> : <Navigate to="/login" />} />
           <Route path="/logout" element={<Logout setUser={handleLogout} />} />
         </Routes>
-        <Footer />
       </div>
     </div>
   );

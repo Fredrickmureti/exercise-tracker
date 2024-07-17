@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './StepCounterDetail.css';
+import VideoBackground from './VideoBackground'; // Assuming you create a separate component for the video background
 
 const StepCounterDetail = () => {
   const [steps, setSteps] = useState(0);
@@ -26,7 +27,7 @@ const StepCounterDetail = () => {
 
   return (
     <div className="step-counter-detail-page">
-      <div className="background-overlay"></div>
+      <VideoBackground />
       <div className="step-counter-detail-container">
         <h2>Step Counter Details</h2>
         <p>Steps: {steps}</p>

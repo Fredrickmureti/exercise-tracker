@@ -178,7 +178,6 @@ const SetAlarm = ({ isDetailPage = false }) => {
             ))}
           </ul>
         </div>
-        <button onClick={testAlarmSound}>Test Alarm Sound</button>
         {playingAlarm && (
           <Sound
             url="/audio/ALARM.wav"
