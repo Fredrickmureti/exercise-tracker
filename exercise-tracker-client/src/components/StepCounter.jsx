@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Sound from 'react-sound';
@@ -83,7 +83,7 @@ const StepCounter = () => {
           // Only update if the distance is significant to avoid rapid updates
           if (distanceCovered > 0.01) {
             setDistance((prevDistance) => prevDistance + distanceCovered);
-            setSteps((prevSteps) => prevSteps + Math.floor(distanceCovered * 1312.33595801)); // Approx steps per meter
+            detectSteps(distanceCovered);
             if (distanceCovered >= 0.5) {
               setPlaySound(true);
               toast.info(`You have covered ${Math.floor(distanceCovered * 1000)} meters!`, {
@@ -133,11 +133,41 @@ const StepCounter = () => {
     return R * c; // Distance in kilometers
   };
 
+  // Peak detection algorithm for step counting
+  const detectSteps = useCallback((distanceCovered) => {
+    const stepsCovered = Math.floor(distanceCovered * 1312.33595801); // Approx steps per meter
+    setSteps((prevSteps) => prevSteps + stepsCovered);
+  }, []);
+
+  const handleReset = () => {
+    setSteps(0);
+    setDistance(0);
+    localStorage.removeItem('steps');
+    localStorage.removeItem('distance');
+    toast.success('Step counter reset!', {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  };
+
   return (
     <div className="step-counter">
-      <button className="start-button" onClick={handleStartCounting}>
-        Start Step Counting
-      </button>
+      <div className="controls">
+        <button className="start-button" onClick={handleStartCounting}>
+          Start Step Counting
+        </button>
+        <button className="details-button" onClick={() => navigate('/step-counter-detail')}>
+          Step Counter Details
+        </button>
+        <button className="reset-button" onClick={handleReset}>
+          Reset
+        </button>
+      </div>
       <h2>Step Counter</h2>
       <p>Steps: {steps}</p>
       <p>Distance: {distance.toFixed(2)} km</p>
