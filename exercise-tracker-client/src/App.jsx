@@ -12,6 +12,7 @@ import StepCounterDetail from './components/StepCounterDetail';
 import Footer from './components/Footer';
 import HomePage from './components/HomePage';
 import ProgressTracker from './components/ProgressTracker';
+import MetricsDisplay from './components/MetricsDisplay';
 import { jwtDecode as jwt_decode } from 'jwt-decode';
 import './App.css';
 
@@ -70,6 +71,7 @@ const App = () => {
           <Route path="/weather-detail" element={user ? <WeatherDetail /> : <Navigate to="/login" />} />
           <Route path="/step-counter-detail" element={user ? <StepCounterDetail /> : <Navigate to="/login" />} />
           <Route path="/progress-tracker" element={user ? <ProgressTracker /> : <Navigate to="/login" />} />
+          <Route path="/metrics-display" element={user ? <MetricsDisplay /> : <Navigate to="/login" />} /> {/* Add MetricsDisplay route */}
           <Route path="/logout" element={<Logout setUser={handleLogout} />} />
         </Routes>
       </div>

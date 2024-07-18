@@ -12,6 +12,7 @@ const NavigationPane = () => {
       <Link to="/set-alarm" className="nav-link"><FaClock /> Set Alarm</Link>
       <Link to="/step-counter-detail" className="nav-link"><FaWalking /> Step Counter</Link>
       <Link to="/progress-tracker" className="nav-link"><FaChartLine /> Progress Tracker</Link>
+      <Link to="/metrics-display" className="nav-link"><FaChartLine /> Metrics Display</Link>
     </div>
   );
 };

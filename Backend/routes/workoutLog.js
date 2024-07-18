@@ -33,4 +33,16 @@ router.get('/:userId', async (req, res) => {
   }
 });
 
+
+
+// Delete a workout log
+router.delete('/:id', async (req, res) => {
+  try {
+    await WorkoutLog.findByIdAndDelete(req.params.id);
+    res.status(200).json({ message: 'Workout log deleted successfully.' });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
 module.exports = router;

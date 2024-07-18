@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './MetricsDisplay.css';
+import { format } from 'date-fns';
 import withUserId from './WithUserId';
-
-const apiUrl = 'http://localhost:3000/api';
+const apiUrl = 'https://backend-gules-seven-67.vercel.app/api';
+//const apiUrl = 'http://localhost:3000/api';
 
 const MetricsDisplay = ({ userId }) => {
   const [foodLog, setFoodLog] = useState([]);
@@ -154,7 +155,7 @@ const MetricsDisplay = ({ userId }) => {
         <ul className="metrics-list">
           {foodLog.map(log => (
             <li key={log._id} className="metrics-item">
-              <p>{log.date}: {log.foodItem} - {log.calories} calories</p>
+              <p>{format(new Date(log.date), 'PPP')}: {log.foodItem} - {log.calories} calories</p>
               <button onClick={() => handleDeleteFoodLog(log._id)}>Delete</button>
             </li>
           ))}
@@ -165,7 +166,7 @@ const MetricsDisplay = ({ userId }) => {
         <ul className="metrics-list">
           {workoutLog.map(log => (
             <li key={log._id} className="metrics-item">
-              <p>{log.date}: {log.workoutType} - {log.duration} mins - {log.intensity}</p>
+              <p>{format(new Date(log.date), 'PPP')}: {log.workoutType} - {log.duration} mins - {log.intensity}</p>
               <button onClick={() => handleDeleteWorkoutLog(log._id)}>Delete</button>
             </li>
           ))}

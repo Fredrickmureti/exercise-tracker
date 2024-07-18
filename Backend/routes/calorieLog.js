@@ -27,4 +27,16 @@ router.get('/:userId', async (req, res) => {
   }
 });
 
+
+// Delete a calorie log
+router.delete('/:id', async (req, res) => {
+  try {
+    await CalorieLog.findByIdAndDelete(req.params.id);
+    res.status(200).json({ message: 'Calorie log deleted successfully.' });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
+
 module.exports = router;

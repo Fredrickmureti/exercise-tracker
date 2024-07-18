@@ -6,8 +6,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import 'react-datepicker/dist/react-datepicker.css';
 import './ProgressTracker.css';
 import withUserId from './WithUserId';
-
-const apiUrl = 'http://localhost:3000/api';
+const apiUrl = 'https://backend-gules-seven-67.vercel.app/api';
+//const apiUrl = 'http://localhost:3000/api';
 
 const ProgressTracker = ({ userId }) => {
   const [stepsData, setStepsData] = useState([]);
