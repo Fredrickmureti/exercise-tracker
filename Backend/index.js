@@ -54,6 +54,9 @@ app.get('/', (req, res) => {
 app.use('/api/users', require('./routes/user'));
 app.use('/api/exercises', authenticateToken, require('./routes/exercise'));
 app.use('/api/exercises', authenticateToken, require('./routes/deleteUpdate'));
+app.use('/api/users', require('./routes/user'));
+app.use('/api/calorie-logs', authenticateToken, require('./routes/calorieLog'));
+app.use('/api/workout-logs', authenticateToken, require('./routes/workoutLog'));
 
 // Handle 404 errors for non-API routes
 app.use((req, res, next) => {

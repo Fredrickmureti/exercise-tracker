@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Pacifico&display=swap');
+
+.metrics-display {
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 2s ease-in-out;
+  max-width: 1000px;
+  margin: auto;
+}
+
+.metrics-title {
+  font-family: 'Pacifico', cursive;
+  font-size: 2.5em;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.metrics-subtitle {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.5em;
+  color: #333;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.metrics-section {
+  margin-bottom: 20px;
+}
+
+.metrics-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.metrics-item {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  animation: slideIn 1s ease-in-out;
+}
+
+.metrics-item p {
+  margin: 0;
+  font-size: 1.2em;
+  color: #555;
+}
+
+.metrics-item button {
+  padding: 5px 10px;
+  font-size: 1em;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #e74c3c;
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+.metrics-item button:hover {
+  background-color: #c0392b;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

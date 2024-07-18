@@ -5,9 +5,9 @@ import DatePicker from 'react-datepicker';
 import 'react-toastify/dist/ReactToastify.css';
 import 'react-datepicker/dist/react-datepicker.css';
 import './ProgressTracker.css';
+import withUserId from './WithUserId';
 
-//const apiUrl = 'https://backend-gules-seven-67.vercel.app/api';
- const apiUrl = 'http://localhost:3000/api';
+const apiUrl = 'http://localhost:3000/api';
 
 const ProgressTracker = ({ userId }) => {
   const [stepsData, setStepsData] = useState([]);
@@ -56,11 +56,11 @@ const ProgressTracker = ({ userId }) => {
         const foodLog = await foodLogResponse.json();
         const workoutLog = await workoutLogResponse.json();
 
-        setStepsData(stepsData);
-        setDistanceData(distanceData);
-        setCaloriesData(caloriesData);
-        setFoodLog(foodLog);
-        setWorkoutLog(workoutLog);
+        setStepsData(Array.isArray(stepsData) ? stepsData : []);
+        setDistanceData(Array.isArray(distanceData) ? distanceData : []);
+        setCaloriesData(Array.isArray(caloriesData) ? caloriesData : []);
+        setFoodLog(Array.isArray(foodLog) ? foodLog : []);
+        setWorkoutLog(Array.isArray(workoutLog) ? workoutLog : []);
       } catch (error) {
         console.error('Error fetching data:', error);
         toast.error('Failed to fetch data.', {
@@ -140,9 +140,16 @@ const ProgressTracker = ({ userId }) => {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`
         },
-        body: JSON.stringify({ userId, date, workoutType, workoutDuration, workoutIntensity, workoutNotes })
+        body: JSON.stringify({
+          userId,
+          date,
+          workoutType,
+          duration: workoutDuration,  // Ensure the key matches the model
+          intensity: workoutIntensity,  // Ensure the key matches the model
+          notes: workoutNotes
+        })
       });
-
+  
       if (response.ok) {
         const newWorkoutLog = await response.json();
         setWorkoutLog([...workoutLog, newWorkoutLog]);
@@ -185,6 +192,7 @@ const ProgressTracker = ({ userId }) => {
       });
     }
   };
+  
 
   return (
     <div className="progress-tracker">
@@ -272,4 +280,4 @@ const ProgressTracker = ({ userId }) => {
   );
 };
 
-export default ProgressTracker;
+export default withUserId(ProgressTracker);
