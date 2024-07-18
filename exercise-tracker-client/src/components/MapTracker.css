@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Pacifico&display=swap');
+
+.map-tracker {
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 2s ease-in-out;
+  max-width: 1000px;
+  margin: auto;
+}
+
+.map-tracker-title {
+  font-family: 'Pacifico', cursive;
+  font-size: 2.5em;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.map-tracker-container {
+  height: 500px;
+  width: 100%;
+  position: relative;
+}
+
+.map {
+  height: 100%;
+  width: 100%;
+  border-radius: 10px;
+}
+
+.distance-info {
+  margin-top: 20px;
+}
+
+.distance-info h3 {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.5em;
+  color: #333;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}

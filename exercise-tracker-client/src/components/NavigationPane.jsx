@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FaHome, FaPlus, FaList, FaClock, FaWalking, FaChartLine } from 'react-icons/fa';
+import { FaHome, FaPlus, FaList, FaClock, FaWalking, FaChartLine, FaMapMarkerAlt } from 'react-icons/fa';
 import './NavigationPane.css';
 
 const NavigationPane = () => {
@@ -13,6 +13,7 @@ const NavigationPane = () => {
       <Link to="/step-counter-detail" className="nav-link"><FaWalking /> Step Counter</Link>
       <Link to="/progress-tracker" className="nav-link"><FaChartLine /> Progress Tracker</Link>
       <Link to="/metrics-display" className="nav-link"><FaChartLine /> Metrics Display</Link>
+      <Link to="/map-tracker" className="nav-link"><FaMapMarkerAlt /> Map Tracker</Link>
     </div>
   );
 };

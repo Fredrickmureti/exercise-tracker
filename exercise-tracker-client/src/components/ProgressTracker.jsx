@@ -25,7 +25,6 @@ const ProgressTracker = ({ userId }) => {
   const [date, setDate] = useState(new Date());
 
   useEffect(() => {
-    // Fetch data from backend and local storage
     const fetchData = async () => {
       try {
         const token = localStorage.getItem('token');
@@ -98,7 +97,12 @@ const ProgressTracker = ({ userId }) => {
       }
     };
 
+    // Initial fetch
     fetchData();
+
+    // Continuously check for data updates every 5 seconds
+    const interval = setInterval(fetchData, 5000);
+    return () => clearInterval(interval);
   }, [userId]);
 
   const handleAddFood = async () => {
