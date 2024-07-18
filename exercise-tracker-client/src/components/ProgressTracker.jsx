@@ -6,6 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import 'react-datepicker/dist/react-datepicker.css';
 import './ProgressTracker.css';
 import withUserId from './WithUserId';
+
 const apiUrl = 'https://backend-gules-seven-67.vercel.app/api';
 //const apiUrl = 'http://localhost:3000/api';
 
@@ -24,7 +25,7 @@ const ProgressTracker = ({ userId }) => {
   const [date, setDate] = useState(new Date());
 
   useEffect(() => {
-    // Fetch data from backend
+    // Fetch data from backend and local storage
     const fetchData = async () => {
       try {
         const token = localStorage.getItem('token');
@@ -62,8 +63,30 @@ const ProgressTracker = ({ userId }) => {
         setFoodLog(Array.isArray(foodLog) ? foodLog : []);
         setWorkoutLog(Array.isArray(workoutLog) ? workoutLog : []);
       } catch (error) {
-        console.error('Error fetching data:', error);
-        toast.error('Failed to fetch data.', {
+        console.error('Error fetching data from backend:', error);
+        toast.error('Failed to fetch data from backend.', {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
+
+      // Fetch data from local storage
+      try {
+        const storedStepsData = JSON.parse(localStorage.getItem('stepsData')) || [];
+        const storedDistanceData = JSON.parse(localStorage.getItem('distanceData')) || [];
+        const storedCaloriesData = JSON.parse(localStorage.getItem('caloriesData')) || [];
+
+        setStepsData(storedStepsData);
+        setDistanceData(storedDistanceData);
+        setCaloriesData(storedCaloriesData);
+      } catch (error) {
+        console.error('Error fetching data from local storage:', error);
+        toast.error('Failed to fetch data from local storage.', {
           position: "top-right",
           autoClose: 5000,
           hideProgressBar: false,
@@ -149,7 +172,7 @@ const ProgressTracker = ({ userId }) => {
           notes: workoutNotes
         })
       });
-  
+
       if (response.ok) {
         const newWorkoutLog = await response.json();
         setWorkoutLog([...workoutLog, newWorkoutLog]);
@@ -192,7 +215,6 @@ const ProgressTracker = ({ userId }) => {
       });
     }
   };
-  
 
   return (
     <div className="progress-tracker">
