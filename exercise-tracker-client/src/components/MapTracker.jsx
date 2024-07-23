@@ -6,6 +6,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import { animated } from 'react-spring';
 import './MapTracker.css';
 
+
+
+
 const MapTracker = () => {
   const [position, setPosition] = useState(null);
   const [path, setPath] = useState([]);
@@ -37,6 +40,8 @@ const MapTracker = () => {
     const d = R * c;
     return d; // distance in km
   };
+
+  //The above algoritm is called 
 
   const requestLocation = () => {
     if (!navigator.geolocation) {

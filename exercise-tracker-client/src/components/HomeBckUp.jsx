@@ -5,7 +5,6 @@ import ReactPlayer from 'react-player';
 import { useNavigate } from 'react-router-dom';
 import './HomePage.css';
 import Footer from './Footer';
-import Header from './Header';
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -14,7 +13,6 @@ const HomePage = () => {
 
   return (
     <div className="homepage">
-      <Header />
       <ReactPlayer
         url="/videos/HOMEPage.mp4" // Adjusted the path to match the public folder structure
         playing
@@ -49,7 +47,7 @@ const HomePage = () => {
         <animated.div style={slideIn} className="navigation-icons">
           <div className="nav-icon" onClick={() => navigate('/login')}>
             <FaSignInAlt size={50} />
-            <p>Explore</p>
+            <p>Login</p>
           </div>
         </animated.div>
       </div>

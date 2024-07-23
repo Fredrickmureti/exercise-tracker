@@ -7,10 +7,9 @@ const jwt = require('jsonwebtoken');
 
 const app = express();
 
-
 // CORS options
 const corsOptions = {
-  origin: ['https://exercise-tracker-arena.vercel.app', 'http://localhost:5173'], // Frontend URL here
+  origin: ['https://exercise-tracker-arena.vercel.app', 'http://localhost:5174', 'http://localhost:5173'], // Frontend URL here
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
   optionsSuccessStatus: 204

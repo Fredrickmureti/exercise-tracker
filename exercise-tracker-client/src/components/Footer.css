@@ -2,13 +2,12 @@
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css');
 
 .footer {
+  width: 100%;
   background-color: #333;
   color: white;
-  padding: 20px;
-  text-align: center;
-  position: relative;
-  bottom: -390px;
-  max-width: 900px;
+  padding: 1rem 0;
+  position: absolute;
+  bottom: 0;
   animation: fadeIn 2s ease-in-out;
 
 
