@@ -48,17 +48,6 @@ const App = () => {
 
   return (
     <div className="root-container">
-      {location.pathname === '/' && (
-        <video
-          className="background-video"
-          autoPlay
-          loop
-          muted
-          playsInline
-        >
-          <source src="/videos/HOMEPage.mp4" type="video/mp4" />
-        </video>
-      )}
       <div className="content-container">
         <Routes>
           <Route path="/" element={<Navigate to="/home" />} />

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSpring, animated } from 'react-spring';
 import { FaClock, FaCheckCircle, FaTasks, FaSignInAlt } from 'react-icons/fa';
 import ReactPlayer from 'react-player';
@@ -12,11 +12,35 @@ const HomePage = () => {
   const fadeIn = useSpring({ opacity: 1, from: { opacity: 0 }, delay: 500 });
   const slideIn = useSpring({ transform: 'translateY(0px)', from: { transform: 'translateY(-50px)' }, delay: 700 });
 
+  const [videoUrl, setVideoUrl] = useState('/videos/HOMEPage.mp4');
+
+  // Effect to handle the video URL based on screen size
+  useEffect(() => {
+    const updateVideoUrl = () => {
+      if (window.innerWidth <= 768) {
+        setVideoUrl('/videos/HomePage2.mp4');
+      } else {
+        setVideoUrl('/videos/HOMEPage.mp4');
+      }
+    };
+
+    // Update the video URL on mount
+    updateVideoUrl();
+
+    // Add event listener for window resize
+    window.addEventListener('resize', updateVideoUrl);
+
+    // Clean up event listener on component unmount
+    return () => {
+      window.removeEventListener('resize', updateVideoUrl);
+    };
+  }, []);
+
   return (
     <div className="homepage">
       <Header />
       <ReactPlayer
-        url="/videos/HOMEPage.mp4" // Adjusted the path to match the public folder structure
+        url={videoUrl}
         playing
         loop
         muted
