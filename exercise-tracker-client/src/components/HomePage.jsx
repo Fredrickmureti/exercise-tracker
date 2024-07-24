@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useSpring, animated } from 'react-spring';
 import { FaClock, FaCheckCircle, FaTasks, FaSignInAlt } from 'react-icons/fa';
-import ReactPlayer from 'react-player';
 import { useNavigate } from 'react-router-dom';
 import './HomePage.css';
 import Footer from './Footer';
@@ -12,42 +11,10 @@ const HomePage = () => {
   const fadeIn = useSpring({ opacity: 1, from: { opacity: 0 }, delay: 500 });
   const slideIn = useSpring({ transform: 'translateY(0px)', from: { transform: 'translateY(-50px)' }, delay: 700 });
 
-  const [videoUrl, setVideoUrl] = useState('/videos/HOMEPage.mp4');
-
-  // Effect to handle the video URL based on screen size
-  useEffect(() => {
-    const updateVideoUrl = () => {
-      if (window.innerWidth <= 768) {
-        setVideoUrl('/videos/HomePage2.mp4');
-      } else {
-        setVideoUrl('/videos/HOMEPage.mp4');
-      }
-    };
-
-    // Update the video URL on mount
-    updateVideoUrl();
-
-    // Add event listener for window resize
-    window.addEventListener('resize', updateVideoUrl);
-
-    // Clean up event listener on component unmount
-    return () => {
-      window.removeEventListener('resize', updateVideoUrl);
-    };
-  }, []);
-
   return (
     <div className="homepage">
       <Header />
-      <ReactPlayer
-        url={videoUrl}
-        playing
-        loop
-        muted
-        className="background-video"
-        width="100%"
-        height="100%"
-      />
+      <div className="background-image"></div> {/* Background image div */}
       <div className="content">
         <animated.h1 style={fadeIn}>Welcome to Exercise Tracker</animated.h1>
         <animated.p style={slideIn}>
