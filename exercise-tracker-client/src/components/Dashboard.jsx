@@ -13,7 +13,7 @@ const Dashboard = ({ user, handleLogout }) => {
 
   return (
     <div className="dashboard">
-      <h1 className="welcome-message">Welcome, {user.firstName}!</h1>
+      <h1 className="welcome-message">Welcome, {user.firstName }!</h1>
       <NavigationPane />
       <div className="dashboard-buttons">
         <button className="dashboard-button" onClick={() => navigate('/add-exercise')}>Add Exercise</button>
@@ -27,12 +27,12 @@ const Dashboard = ({ user, handleLogout }) => {
         <div>
           <Weather />
         </div>
-        <div>
+
           <SetAlarm />
-        </div>
-        <div>
+
+
           <StepCounter/>
-        </div>
+
       </div>
     </div>
   );

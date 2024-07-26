@@ -66,7 +66,6 @@ const App = () => {
           <Route path="/logout" element={<Logout setUser={handleLogout} />} />
         </Routes>
       </div>
-      <Footer />
     </div>
   );
 };

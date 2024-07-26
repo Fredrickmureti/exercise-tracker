@@ -3,6 +3,7 @@ import './AddExercise.css';
 import NavigationPane from './NavigationPane';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import ToggleComponent from './ToggleComponent';
 
 const apiUrl = 'https://backend-gules-seven-67.vercel.app/api';
 // const apiUrl = 'http://localhost:3000/api';
@@ -12,6 +13,7 @@ const AddExercise = ({ userId }) => {
   const [duration, setDuration] = useState(0);
   const [date, setDate] = useState('');
   const [time, setTime] = useState('');
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -79,7 +81,8 @@ const AddExercise = ({ userId }) => {
   return (
     <div className="add-exercise">
       <h2>Add Exercise</h2>
-      <NavigationPane />
+
+      <ToggleComponent  ComponentToToggle={NavigationPane} iconSrc={"images/ToggleButton.png"}/>
       <form onSubmit={handleSubmit}>
         <label>
           Description:

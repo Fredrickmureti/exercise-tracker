@@ -1,0 +1,31 @@
+.toggle-component-container {
+  position: relative;
+
+}
+
+.icon-container {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  cursor: pointer;
+}
+
+.toggle-icon {
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+}
+
+.component-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 200px;
+  height: 190px;
+  display: flex;
+  overflow: auto;
+  background-color: #33333321;
+  color: white;
+  padding: 20px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.075);
+}

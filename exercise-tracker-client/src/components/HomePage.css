@@ -31,6 +31,7 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   color: white;
   /* Text color change for better contrast */
+  overflow: hidden;
 }
 
 h1 {
