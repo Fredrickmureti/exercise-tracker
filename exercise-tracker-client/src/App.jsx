@@ -9,7 +9,7 @@ import Dashboard from './components/Dashboard';
 import SetAlarm from './components/SetAlarm';
 import WeatherDetail from './components/WeatherDetail';
 import StepCounterDetail from './components/StepCounterDetail';
-import Footer from './components/Footer';
+//import Footer from './components/Footer';
 import HomePage from './components/HomePage';
 import ProgressTracker from './components/ProgressTracker';
 import MetricsDisplay from './components/MetricsDisplay';
@@ -70,4 +70,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default App; // Export the App component

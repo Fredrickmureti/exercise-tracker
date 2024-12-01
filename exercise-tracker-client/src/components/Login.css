@@ -45,6 +45,7 @@ input {
 
 input:focus {
   border-color: #3498db;
+
   outline: none;
   box-shadow: 0 0 10px rgba(52, 152, 219, 0.5);
 }
@@ -67,6 +68,7 @@ button:hover {
 .error {
   color: red;
   font-size: 1em;
+  background-color: fred;
 }
 
 @keyframes fadeIn {
@@ -76,6 +78,7 @@ button:hover {
 
   to {
     opacity: 1;
+    columns: feed;
   }
 }
 
@@ -89,4 +92,10 @@ button:hover {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  color: #e0f7fa;
 }

@@ -3,8 +3,17 @@ import { useSpring, animated } from 'react-spring';
 import { FaClock, FaCheckCircle, FaTasks, FaSignInAlt } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import './HomePage.css';
-import Footer from './Footer';
+//import Footer from './Footer';
 import Header from './Header';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+
+const data = [
+  { name: 'Day 1', calories: 400 },
+  { name: 'Day 2', calories: 300 },
+  { name: 'Day 3', calories: 500 },
+  { name: 'Day 4', calories: 200 },
+  { name: 'Day 5', calories: 700 },
+];
 
 const HomePage = () => {
   const navigate = useNavigate(); // Hook to navigate programmatically
@@ -22,6 +31,15 @@ const HomePage = () => {
         <animated.p style={slideIn}>
           Track your exercises, set alarms, and stay motivated to keep time. Keeping track of your progress is the key to success!
         </animated.p> {/* Animated description */}
+        <ResponsiveContainer width="100%" height={300}>
+          <LineChart data={data}>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="name" />
+            <YAxis />
+            <Tooltip />
+            <Line type="monotone" dataKey="calories" stroke="#8884d8" />
+          </LineChart>
+        </ResponsiveContainer>
         <animated.div style={slideIn} className="features">
           <div className="feature">
             <FaClock size={50} /> {/* Icon for setting alarms */}
@@ -46,7 +64,6 @@ const HomePage = () => {
           </div>
         </animated.div> {/* Animated navigation icons section */}
       </div>
-      <Footer /> {/* Footer component */}
     </div>
   );
 };

@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { Typography } from 'antd';
 import './Clock.css';
+
+const { Text } = Typography;
 
 const Clock = () => {
   const [time, setTime] = useState(new Date());
@@ -13,7 +16,7 @@ const Clock = () => {
 
   return (
     <div className="clock">
-      <h2>{time.toLocaleTimeString()}</h2>
+      <Text strong>{time.toLocaleTimeString()}</Text>
     </div>
   );
 };

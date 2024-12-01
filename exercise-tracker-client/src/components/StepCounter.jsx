@@ -68,6 +68,8 @@ const StepCounter = () => {
     }
   };
 
+
+// calculating the actial distance after making sure location is enabled
   useEffect(() => {
     if (prevPosition) {
       const watchId = navigator.geolocation.watchPosition(
